@@ -15,27 +15,6 @@ export class World extends ThreejsElement {
   private direction = new THREE.Vector3();
   private prevTime = performance.now();
 
-  createBuildings() {
-    for (let i = 0; i < 10; i++) {
-      const width = Math.random() * 10 + 5;
-      const height = Math.random() * 40 + 10;
-      const depth = Math.random() * 10 + 5;
-
-      const boxGeometry = new THREE.BoxGeometry(width, height, depth);
-      const boxMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
-
-      const cube = new THREE.Mesh(boxGeometry, boxMaterial);
-      cube.position.x = Math.random() * 100 - 50;
-      cube.position.y = height / 2;
-      cube.position.z = Math.random() * 100 - 50;
-
-      cube.userData.boundingBox = new THREE.Box3().setFromObject(cube);
-
-      this.scene.add(cube);
-      this.objects.push(cube);
-    }
-  }
-
   constructor(containerId: string) {
     super(containerId);
 
@@ -113,6 +92,27 @@ export class World extends ThreejsElement {
         break;
     }
   };
+
+  createBuildings() {
+    for (let i = 0; i < 10; i++) {
+      const width = Math.random() * 10 + 5;
+      const height = Math.random() * 40 + 10;
+      const depth = Math.random() * 10 + 5;
+
+      const boxGeometry = new THREE.BoxGeometry(width, height, depth);
+      const boxMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+
+      const cube = new THREE.Mesh(boxGeometry, boxMaterial);
+      cube.position.x = Math.random() * 100 - 50;
+      cube.position.y = height / 2;
+      cube.position.z = Math.random() * 100 - 50;
+
+      cube.userData.boundingBox = new THREE.Box3().setFromObject(cube);
+
+      this.scene.add(cube);
+      this.objects.push(cube);
+    }
+  }
 
   updatePlayerPosition(delta: number) {
     const moveX =

@@ -1,5 +1,11 @@
 import { Router } from "./router";
-import { HomePage, BoxPage, ComponentsPage, WorldPage } from "./pages";
+import {
+  HomePage,
+  BoxPage,
+  ComponentsPage,
+  WorldPage,
+  SpacePage,
+} from "./pages";
 import { Navigation } from "./components/navigation";
 import { Route } from "./types";
 import "./styles/style.scss";
@@ -16,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       children: [
         { path: "/box", component: new BoxPage() },
         { path: "/world", component: new WorldPage() },
+        { path: "/space", component: new SpacePage() },
       ],
     },
   ];
