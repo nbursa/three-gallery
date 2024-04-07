@@ -54,7 +54,7 @@ export class StarField extends ThreejsElement {
       const galaxyGeometry = new THREE.BufferGeometry();
       const vertices = [];
       const center = new THREE.Vector3(
-        THREE.MathUtils.randFloatSpread(3000), // Increase spread in the scene
+        THREE.MathUtils.randFloatSpread(3000),
         THREE.MathUtils.randFloatSpread(3000),
         THREE.MathUtils.randFloatSpread(3000)
       );
@@ -66,9 +66,9 @@ export class StarField extends ThreejsElement {
       );
 
       for (let j = 0; j < 5000; j++) {
-        const distance = Math.random() * 500; // Significantly increase spread
-        const angle = Math.random() * Math.PI * 2; // Full circle
-        const height = (Math.random() - 0.5) * 100; // Increase z-axis variation for more spread in depth
+        const distance = Math.random() * 500;
+        const angle = Math.random() * Math.PI * 2;
+        const height = (Math.random() - 0.5) * 100;
 
         const star = new THREE.Vector3();
         star.x = center.x + distance * Math.cos(angle);
@@ -82,10 +82,9 @@ export class StarField extends ThreejsElement {
         new THREE.Float32BufferAttribute(vertices, 3)
       );
 
-      // Generating colors
       const colors: number[] = [];
       for (let k = 0; k < vertices.length; k += 3) {
-        const ratio = k / vertices.length; // Adjusted for the vertices being in sets of 3 (x, y, z)
+        const ratio = k / vertices.length;
         const color = new THREE.Color().lerpColors(
           centerColor,
           new THREE.Color(0xffffff),
@@ -99,7 +98,7 @@ export class StarField extends ThreejsElement {
       );
 
       const galaxyMaterial = new THREE.PointsMaterial({
-        size: Math.random() * 2 + 1, // Increase size for better visibility
+        size: Math.random() * 2 + 1,
         vertexColors: true,
         opacity: 0.6,
         transparent: true,
@@ -130,21 +129,19 @@ export class StarField extends ThreejsElement {
 
   private initControls() {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+    this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;
     this.controls.screenSpacePanning = false;
 
-    this.controls.minDistance = 100; // You can adjust these values
+    this.controls.minDistance = 100;
     this.controls.maxDistance = 5000;
 
-    // Optional: Adjust to limit the angles of orbit (vertical orbit limits here)
     this.controls.maxPolarAngle = Math.PI / 2;
   }
 
   protected render() {
     this.camera.position.z -= 0.1;
     if (this.camera.position.z < -1000) this.camera.position.z = 1000;
-    // super.render();
     if (this.composer) {
       this.composer.render();
     }
