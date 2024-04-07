@@ -32,9 +32,9 @@ export class StarField extends ThreejsElement {
     const vertices = [];
     for (let i = 0; i < 10000; i++) {
       vertices.push(
-        THREE.MathUtils.randFloatSpread(1000), // x
-        THREE.MathUtils.randFloatSpread(1000), // y
-        THREE.MathUtils.randFloatSpread(1000) // z
+        THREE.MathUtils.randFloatSpread(1000),
+        THREE.MathUtils.randFloatSpread(1000),
+        THREE.MathUtils.randFloatSpread(1000)
       );
     }
     this.starsGeometry.setAttribute(
