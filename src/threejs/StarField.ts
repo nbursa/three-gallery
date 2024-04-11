@@ -20,7 +20,14 @@ export class StarField extends ThreejsElement {
 
   constructor(containerId: string) {
     super(containerId);
+    this.container = document.getElementById(containerId);
     this.scene.background = new THREE.Color(0x000000);
+
+    this.init();
+    // window.addEventListener("resize", this.onWindowResize, false);
+  }
+
+  private init() {
     this.initStars();
     this.initGalaxies();
     this.setupPostProcessing();
@@ -129,6 +136,7 @@ export class StarField extends ThreejsElement {
 
   private initControls() {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableZoom = false;
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;
     this.controls.screenSpacePanning = false;

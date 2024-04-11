@@ -22,6 +22,8 @@ export class World extends ThreejsElement {
     const groundMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
     const ground = new THREE.Mesh(groundGeometry, groundMaterial);
     ground.rotation.x = -Math.PI / 2;
+
+    this.scene.background = new THREE.Color(0x87ceeb);
     this.scene.add(ground);
 
     this.createBuildings();

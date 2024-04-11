@@ -44,7 +44,13 @@ export class ThreejsElement {
     this._element.appendChild(this.renderer.domElement);
 
     this.animate();
+
+    window.addEventListener("resize", this.onWindowResize, false);
   }
+
+  private onWindowResize = () => {
+    this.adjustRendererSize();
+  };
 
   animate = () => {
     requestAnimationFrame(this.animate);
@@ -61,7 +67,13 @@ export class ThreejsElement {
       const height = this.container.clientHeight;
       this.renderer.setSize(width, height);
       this.camera.aspect = width / height;
-      this.camera.updateProjectionMatrix();
+    } else {
+      const width =
+        window.innerWidth <= 768 ? window.innerWidth : window.innerWidth / 2;
+      const height = window.innerHeight - 45;
+      this.renderer.setSize(width, height);
+      this.camera.aspect = width / height;
     }
+    this.camera.updateProjectionMatrix();
   }
 }

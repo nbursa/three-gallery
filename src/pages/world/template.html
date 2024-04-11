@@ -1,1 +1,118 @@
-<div id="world-container"></div>
+<div class="world-page">
+  <div id="world-container"></div>
+  <div id="article">
+    <h3 class="title">
+      Interactive 3D Environment with Pointer Lock Controls in Three.js
+    </h3>
+
+    <p>
+      Three.js is an extensive library that supports not just the creation of 3D
+      models but also interactive environments where users can navigate and
+      interact with the 3D world. This article explores the implementation of a
+      "World" component, which integrates Pointer Lock Controls for movement,
+      enabling a first-person shooter-style navigation system.
+    </p>
+
+    <h4>Overview of the World Component</h4>
+
+    <p>
+      The World component is designed to simulate a navigable 3D environment,
+      complete with dynamic objects such as buildings. Users can move through
+      this world using keyboard inputs that control their movements forward,
+      backward, left, and right, enhanced by the Pointer Lock Controls which
+      capture the mouse for a seamless navigation experience.
+    </p>
+
+    <h4>Setting Up the Scene</h4>
+
+    <p>The scene setup involves:</p>
+
+    <ul>
+      <li>
+        <strong>Ground Plane</strong>: A large flat surface that serves as the
+        ground.
+      </li>
+      <li>
+        <strong>Buildings</strong>: Randomly generated buildings that add
+        complexity to the environment.
+      </li>
+      <li>
+        <strong>Lighting</strong>: A combination of ambient and point light to
+        realistically illuminate the scene.
+      </li>
+    </ul>
+
+    <p>
+      The ground and buildings are created using standard Three.js geometries,
+      while the lighting uses a hemisphere light to create soft ambient light
+      mixed with sharper shadows.
+    </p>
+
+    <h4>Integrating Pointer Lock Controls</h4>
+
+    <p>
+      Pointer Lock Controls are crucial for creating an immersive first-person
+      experience. They lock the mouse cursor and listen to mouse movements to
+      rotate the camera, mimicking the look mechanism in first-person video
+      games. Here’s how the controls are initialized and used:
+    </p>
+
+    <pre><code class="language-javascript">this.controls = new PointerLockControls(this.camera, this.renderer.domElement);
+document.addEventListener("click", () => this.controls.lock(), false);</code></pre>
+
+    <h4>Managing Movements and Collisions</h4>
+
+    <p>
+      Movements are managed by capturing keyboard events and adjusting the
+      player’s velocity and position based on the inputs. Collision detection is
+      implemented to prevent the player from walking through buildings, using
+      raycasting and bounding boxes:
+    </p>
+
+    <pre><code class="language-javascript">document.addEventListener("keydown", this.onKeyDown, false);
+document.addEventListener("keyup", this.onKeyUp, false);
+
+function onKeyDown(event) {
+  switch(event.code) {
+    case "KeyW": this.moveForward = true; break;
+    // Other cases...
+  }
+}
+
+function onKeyUp(event) {
+  switch(event.code) {
+    case "KeyW": this.moveForward = false; break;
+    // Other cases...
+  }
+}</code></pre>
+
+    <p>
+      Collision detection checks if the player's next move intersects with any
+      building, restricting movement in that direction if a collision is
+      detected.
+    </p>
+
+    <h4>Real-time Physics and Updates</h4>
+
+    <p>
+      The real-time updates involve adjusting the physics properties of the
+      player, including gravity and movement inertia, to simulate realistic
+      movement within the environment:
+    </p>
+
+    <pre><code class="language-javascript">const delta = (time - this.prevTime) / 1000;
+this.velocity.x -= this.velocity.x * 10.0 * delta; // Inertia
+this.velocity.y -= 9.8 * 100.0 * delta; // Gravity</code></pre>
+
+    <h4>Conclusion</h4>
+
+    <p>
+      The World component in Three.js showcases the library’s ability to create
+      not only static scenes but also dynamic, interactive environments where
+      users can experience first-person navigation and interaction. Such
+      implementations are invaluable in gaming, virtual reality, and simulation
+      applications, providing users with immersive experiences that are both
+      engaging and visually appealing.
+    </p>
+  </div>
+</div>

@@ -1,8 +1,8 @@
-.world-page {
+.space-page {
   display: flex;
   height: calc(100vh - 45px);
 
-  #world-container {
+  #space-container {
     width: 50%;
     height: calc(100vh - 45px);
   }
@@ -11,7 +11,7 @@
     flex-direction: column;
     height: initial;
     width: 100vw;
-    #world-container {
+    #space-container {
       width: 100%;
       height: calc(100vh - 45px);
     }
