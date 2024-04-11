@@ -1,1 +1,128 @@
-<div id="box-container"></div>
+<div class="box-page">
+  <div id="box-container"></div>
+  <div id="article">
+    <h3 class="title">Exploring the 3D Box Component in Three.js</h3>
+
+    <p>
+      Three.js makes it easier to implement 3D objects and animations on the
+      web, providing a powerful framework for 3D graphics programming that is
+      accessible and versatile. One of the simplest yet fundamental 3D shapes is
+      the box, which serves as an excellent starting point for understanding how
+      to manipulate objects in a 3D space using Three.js. This article delves
+      into creating a spinning box component, showcasing the process of
+      integrating Three.js into a typical web application.
+    </p>
+
+    <h4>Getting Started with Three.js</h4>
+
+    <p>
+      Before diving into the specifics of the box component, it is important to
+      understand the basic setup required for any Three.js scene. This setup
+      includes creating a scene, a camera, and a renderer:
+    </p>
+
+    <ul>
+      <li><strong>Scene</strong>: The container for all your 3D objects.</li>
+      <li>
+        <strong>Camera</strong>: Defines the point of view from which you’ll see
+        the scene.
+      </li>
+      <li>
+        <strong>Renderer</strong>: Renders the graphics as defined by the
+        camera’s view onto an HTML canvas.
+      </li>
+    </ul>
+
+    <p>
+      For our box component, these essentials are instantiated in a class that
+      extends a <code>ThreejsElement</code>, ensuring that all 3D elements have
+      a standard implementation framework.
+    </p>
+
+    <h4>Building the Box Component</h4>
+
+    <p>
+      The <code>SpinningBox</code> class illustrates how to create a basic 3D
+      box and add dynamic behavior such as spinning. The key elements in this
+      process include:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Geometry</strong>: The shape and size of the 3D object. In this
+        case, a simple box geometry is used.
+      </li>
+      <li>
+        <strong>Material</strong>: Defines the appearance of the surface of the
+        geometry. Our box uses a textured material loaded from an image file,
+        enhancing the visual appeal.
+      </li>
+      <li>
+        <strong>Mesh</strong>: Combines the geometry with the material, which
+        can then be added to the scene.
+      </li>
+    </ul>
+
+    <p>Here's a brief look at how the <code>SpinningBox</code> is set up:</p>
+
+    <pre><code class="language-javascript">const geometry = new THREE.BoxGeometry(2, 2, 2);
+const textureLoader = new THREE.TextureLoader();
+const texture = textureLoader.load("/images/steam.webp");
+const material = new THREE.MeshStandardMaterial({ map: texture, roughness: 0, metalness: 0 });
+const cube = new THREE.Mesh(geometry, material);</code></pre>
+
+    <h4>Animation and Lighting</h4>
+
+    <p>
+      To bring the box to life, animation and lighting are critical. The box
+      rotates continuously around its axes using the following lines of code
+      inside the <code>render</code> method, which updates on each frame
+      rendered by the browser:
+    </p>
+
+    <pre><code class="language-javascript">this.cube.rotation.x += 0.001;
+this.cube.rotation.y += 0.001;</code></pre>
+
+    <p>
+      Lighting is equally important to ensure the box is visible and has a sense
+      of depth:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Ambient Light</strong>: Illuminates all parts of the scene
+        equally.
+      </li>
+      <li>
+        <strong>Point Light</strong>: Emits light from a specific position in
+        the scene, like a light bulb.
+      </li>
+    </ul>
+
+    <h4>Handling Browser Events</h4>
+
+    <p>
+      To ensure the 3D scene responds to user interaction and browser events,
+      such as resizing the window, event listeners are added:
+    </p>
+
+    <pre><code class="language-javascript">window.addEventListener("resize", this.onWindowResize, false);</code></pre>
+
+    <p>
+      The resize handler adjusts the camera’s aspect ratio and the renderer’s
+      size, ensuring that the 3D scene dynamically fits the display window
+      without distortion.
+    </p>
+
+    <h4>Conclusion</h4>
+
+    <p>
+      The <code>SpinningBox</code> component in Three.js is a simple yet
+      powerful demonstration of using 3D graphics on the web. By understanding
+      how to manipulate basic shapes like a box, developers can build more
+      complex and interactive 3D applications. This example serves as a
+      foundational block for aspiring graphics programmers and web developers
+      interested in bringing 3D interactivity to their applications.
+    </p>
+  </div>
+</div>

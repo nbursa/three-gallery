@@ -1,8 +1,8 @@
-.box-page {
+.morphing-page {
   display: flex;
   height: calc(100vh - 45px);
 
-  #box-container {
+  #morphing-container {
     width: 50%;
     height: calc(100vh - 45px);
   }
@@ -11,7 +11,7 @@
     flex-direction: column;
     height: initial;
     width: 100vw;
-    #box-container {
+    #morphing-container {
       width: 100%;
       height: calc(100vh - 45px);
     }

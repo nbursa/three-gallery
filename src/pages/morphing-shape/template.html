@@ -1,0 +1,108 @@
+<div class="morphing-page">
+  <div id="morphing-container"></div>
+  <div id="article">
+    <h3 class="title">Exploring Dynamic Morphing Shapes in Three.js</h3>
+
+    <p>
+      Three.js not only supports static 3D models but also allows for dynamic
+      morphing between different geometries, enabling developers to create
+      interactive and visually engaging web experiences. This article introduces
+      the Morphing Shape component, a sophisticated example of how geometry
+      morphing can be implemented using Three.js.
+    </p>
+
+    <h4>Understanding Geometry Morphing</h4>
+
+    <p>
+      Geometry morphing, or morph target animation, involves transitioning a
+      mesh between different shapes. It's a technique commonly used in
+      animations to interpolate shapes smoothly. This process requires at least
+      two geometries: a base geometry and one or more target geometries.
+    </p>
+
+    <p>
+      For the Morphing Shape component, a simple box geometry transitions
+      between a sphere and a cylinder, demonstrating the flexibility of Three.js
+      in handling complex transformations:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Base Geometry</strong>: A simple box defined with dimensions
+        2x2x2.
+      </li>
+      <li>
+        <strong>Target Geometries</strong>: Includes a sphere and a cylinder
+        which the box morphs into during the animation.
+      </li>
+    </ul>
+
+    <p>
+      Here’s a simplified code snippet showing how the geometries are prepared
+      for morphing:
+    </p>
+
+    <pre><code class="language-javascript">const geometry = new THREE.BoxGeometry(2, 2, 2);
+const sphereGeometry = new THREE.SphereGeometry(2, 32, 32);
+const cylinderGeometry = new THREE.CylinderGeometry(1, 1, 4, 32);
+
+// Clone positions from target geometries
+const spherePositions = sphereGeometry.attributes.position.clone();
+const cylinderPositions = cylinderGeometry.attributes.position.clone();
+
+// Assign morph attributes to the main geometry
+geometry.morphAttributes.position = [spherePositions, cylinderPositions];</code></pre>
+
+    <h4>Setting Up the Scene</h4>
+
+    <p>The scene includes:</p>
+
+    <ul>
+      <li>
+        <strong>Ambient Light</strong>: Provides overall illumination so all
+        objects are visible.
+      </li>
+      <li>
+        <strong>Point Light</strong>: Creates highlights and shadows to enhance
+        the 3D effect, positioned to optimize the shape's visibility.
+      </li>
+    </ul>
+
+    <p>
+      The Morphing Shape component is rendered within a Three.js scene, which
+      includes standard elements like a camera, renderer, and the necessary
+      lighting to ensure the shapes are clearly visible and aesthetically
+      pleasing.
+    </p>
+
+    <h4>Animating the Morph</h4>
+
+    <p>
+      The real magic happens in the animation loop where the morph targets are
+      influenced based on the rotation of the mesh:
+    </p>
+
+    <pre><code class="language-javascript">if (this.shape?.morphTargetInfluences) {
+  this.shape.morphTargetInfluences[0] = Math.sin(this.shape.rotation.y) * 0.5 + 0.5;
+  this.shape.morphTargetInfluences[1] = Math.cos(this.shape.rotation.y) * 0.5 + 0.5;
+  this.shape.rotation.y += 0.01;
+}</code></pre>
+
+    <p>
+      This code dynamically adjusts the influences of the sphere and cylinder
+      targets based on the sine and cosine of the shape's current rotation,
+      creating a seamless transformation between geometries as the shape spins.
+    </p>
+
+    <h4>Conclusion</h4>
+
+    <p>
+      The Morphing Shape component exemplifies the capabilities of Three.js to
+      create not just static 3D scenes, but also interactive animations that can
+      morph between different states. Such dynamic visuals are particularly
+      useful in educational tools, games, and interactive displays, providing an
+      engaging way to explore complex data and concepts through 3D
+      visualizations.
+    </p>
+  </div>
+</div>
